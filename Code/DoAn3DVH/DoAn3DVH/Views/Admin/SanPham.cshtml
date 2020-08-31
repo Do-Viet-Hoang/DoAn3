@@ -1,0 +1,268 @@
+﻿@model IEnumerable<DoAn3DVH.Models.SanPham>
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/LayoutAdmin.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="page-inner">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Quản lý Sản Phẩm</h4>
+                            <button class="btn btn-primary btn-round ml-auto" onclick="addOneSP()">
+                                <i class="fa fa-plus"></i>
+                                Thêm Sản Phẩm
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="./addSP" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="aoe" id="aoe" value="1"/>
+                            <!-- Modal -->
+                            <div class="modal fade" id="addOne" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-bd">
+                                            <h5 class="modal-title">
+                                                <span class="fw-mediumbold">
+                                                    Thêm
+                                                </span>
+                                                <span class="fw-light">
+                                                    Mới
+                                                </span>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6 pr-0" id="hidemaSp">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Mã SP</label>
+                                                            <input id="aMaSp" name="aMaSp" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" id="hidemaLoaiDt">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Mã Loại</label>
+                                                            <input id="aMaLoai" name="aMaLoai" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Tên SP</label>
+                                                            <input id="atenSp" name="atenSp" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Hãng SP</label>
+                                                            <input id="ahangSp" name="ahangSp" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Giá</label>
+                                                            <input id="aGia" name="aGia" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Màn hình</label>
+                                                            <input id="amanHinh" name="amanHinh" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Hệ điều hành</label>
+                                                            <input id="aheDieuhanh" name="aheDieuhanh" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>CPU</label>
+                                                            <input id="aCpu" name="aCpu" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Camera Trước</label>
+                                                            <input id="acamTr" name="acamTr" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Camera Sau</label>
+                                                            <input name="acamSau" id="acamSau" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Ram</label>
+                                                            <input id="aRam" name="aRam" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Bộ nhớ</label>
+                                                            <input id="aboNho" name="aboNho" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Sim</label>
+                                                            <input id="aSim" name="aSim" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Pin</label>
+                                                            <input id="aPin" name="aPin" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 pr-0">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Trạng thái</label>
+                                                            <input id="atrangThai" name="atrangThai" type="text" class="form-control" placeholder="Điền vào">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Hình ảnh</label>
+                                                            <input type="file" id="aAnh" name="aAnh" class="form-control col-md-7 col-xs-12" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <button type="submit" id="addRowButton" class="btn btn-primary">Thực hiện</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                            <div class="table-responsive">
+                                <div class="col-sm-12">
+                                    <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 193px;">Mã SP</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Mã Loại</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 152px;">Tên SP</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 152px;">Tên Hãng</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Giá</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 152px;">Màn hình</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">HĐH</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">CPU</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Camera Trước</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Camera Sau</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">RAM</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Bộ Nhớ</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Sim</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Pin</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Trạng thái</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Ảnh</th>
+                                                <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Hành Động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var i in Model)
+                                            {
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1">@i.maSp</td>
+                                                    <td>@i.maLoaiDt</td>
+                                                    <td>@i.tenSp</td>
+                                                    <td>@i.hangSp</td>
+                                                    <td>@string.Format("{0:#,##0}", @i.gia)</td>
+                                                    <td>@i.manHinh</td>
+                                                    <td>@i.heDieuhanh</td>
+                                                    <td>@i.CPU</td>
+                                                    <td>@i.cameraTruoc</td>
+                                                    <td>@i.cameraSau</td>
+                                                    <td>@i.RAM</td>
+                                                    <td>@i.boNho</td>
+                                                    <td>@i.Sim</td>
+                                                    <td>@i.Pin</td>
+                                                    <td>@i.trangThai</td>
+                                                    <td><img style="width: 30px; height: 30px;" src="~/Assets/img/product/@i.hinhAnh" /></td>
+                                                    <td>
+                                                        <div class="form-button-action">
+                                                            <button class="btn btn-link btn-primary btn-lg" onclick="editOneSP('@i.maSp')">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <a class="btn btn-link btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá Sản Phẩm này không?')" href="./XoaSp/@i.maSp">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    function addOneSP() {
+        $("#aoe").val("1");
+        $("#aMaSp").val("");
+        $("#aMaLoai").val("");
+        $("#atenSp").val("");
+        $("#ahangSp").val("");
+        $("#aGia").val("");
+        $("#amanHinh").val("");
+        $("#aheDieuhanh").val("");
+        $("#aCpu").val("");
+        $("#acamTr").val("");
+        $("#acamSau").val("");
+        $("#aRam").val("");
+        $("#aboNho").val("");
+        $("#aSim").val("");
+        $("#aPin").val("");
+        $("#atrangThai").val("");
+        $("#aAnh").val("");
+        $("#aAnh1").val("");
+        $("#aAnh2").val("");
+        $("#aAnh3").val("");
+        $("#aAnh4").val("");
+        $('#addOne').modal("show");
+         }
+       function editOneSP(id) {
+        $("#aoe").val("0");
+        $("#hidemaSp").hide();
+        $("#hidemaLoaiDt").hide();
+        $.get("/Admin/get1Sp", { id: id }, function (data) {
+            $("#aMaSp").val(data.maSp);
+            $("#aMaLoai").val(data.maLoaiDt);
+            $("#atenSp").val(data.tenSp);
+            $("#ahangSp").val(data.hangSp);
+            $("#aGia").val(data.gia);
+            $("#amanHinh").val(data.manHinh);
+            $("#aheDieuhanh").val(data.heDieuhanh);
+            $("#aCpu").val(data.CPU);
+            $("#acamTr").val(data.cameraTruoc);
+            $("#acamSau").val(data.cameraSau);
+            $("#aRam").val(data.RAM);
+            $("#aboNho").val(data.boNho);
+            $("#aSim").val(data.Sim);
+            $("#aPin").val(data.Pin);
+            $("#atrangThai").val(data.trangThai);
+            $("#aAnh").val(data.hinhAnh);
+            $("#aAnh1").val(data.hinhAnh1);
+            $("#aAnh2").val(data.hinhAnh2);
+            $("#aAnh1").val(data.hinhAnh3);
+            $("#aAnh2").val(data.hinhAnh4);
+            });
+        $('#addOne').modal("show");
+     }
+</script>
+

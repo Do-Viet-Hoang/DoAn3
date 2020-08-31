@@ -1,0 +1,189 @@
+﻿@model IEnumerable<DoAn3DVH.Models.GioHang>
+@using DoAn3DVH.Models;
+@{
+    ViewBag.Title = "xemgiohang";
+    Layout = "~/Views/LayoutHome.cshtml";
+
+
+    KhachHang kh = null;
+    if (Session["TaiKhoan"] != null)
+    {
+        kh = (KhachHang)Session["TaiKhoan"];
+    }
+}
+<section id="page-content" class="page-wrapper">
+    <div class="shop-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-sm-12">
+                    <ul class="cart-tab">
+                        <li>
+                            <a class="active" href="#shopping-cart" data-toggle="tab">
+                                <span>01</span>
+                                Xem giỏ hàng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#checkout" data-toggle="tab">
+                                <span>02</span>
+                                Đặt hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10 col-sm-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- shopping-cart start -->
+                        <div class="tab-pane active" id="shopping-cart">
+                            <div class="shopping-cart-content">
+                                <div class="table-content table-responsive mb-50">
+                                    <table class="text-center">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Sản phẩm</th>
+                                                <th class="product-price">Giá</th>
+                                                <th class="product-quantity">Số lượng</th>
+                                                <th class="product-subtotal">Tổng tiền</th>
+                                                <th class="product-remove">Xoá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- tr -->
+                                            @foreach (var i in Model)
+                                            {
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <div class="pro-thumbnail-img">
+                                                            <img src="~/Assets/img/product/@i.anh" alt="" />
+                                                        </div>
+                                                        <div class="pro-thumbnail-info text-left">
+                                                            <h6 class="product-title-2">
+                                                                <a href="/Home/GetSpDetail/@i.id">@i.ten</a>
+                                                            </h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-price">@string.Format("{0:#,##0}", @i.gia) VNĐ</td>
+                                                    <td class="product-quantity">
+                                                        <div class="cart-plus-minus f-left" data-product-code="@i.id">
+                                                            <input type="text" value="@i.sl" name="qtybutton" class="cart-plus-minus-box" data-id="@i.id">
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-subtotal" id="tongTien">@string.Format("{0:#,##0}", @i.sl * @i.gia) VNĐ</td>
+                                                    <td class="product-remove">
+                                                        <a href="/Home/xemgiohang/" onclick="removeSP('@i.id')"><i class="zmdi zmdi-close"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="payment-details box-shadow p-30 mb-50">
+                                            <h6 class="widget-title border-left mb-20">Check Out</h6>
+                                            <table>
+                                                <tr>
+                                                    <td class="td-title-1">Tổng tiền</td>
+                                                    <td class="td-title-2">
+                                                    @{
+                                                        int tongTien = 0;
+                                                        foreach (var i in Model)
+                                                        {
+                                                            tongTien += i.sl * i.gia;
+                                                        }
+                                                    }
+                                                    @string.Format("{0:#,##0} VNĐ", tongTien + 30000)</td>
+                                                </tr>
+                                            </table>
+                                            <a href="#checkout" data-toggle="tab" class="button extra-small button-black" onclick="checkDangNhap()">
+                                                <span class="text-uppercase">Đặt hàng ngay</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- shopping-cart end -->
+                        <!-- wishlist start -->
+                        <!-- wishlist end -->
+                        <!-- checkout start -->
+                        <div class="tab-pane" id="checkout">
+                            <div class="checkout-content box-shadow p-30">
+                                <form action="/Home/DatHang">
+                                    <div class="row">
+                                        <!-- billing details -->
+                                        <div class="col-md-6">
+                                            <div class="billing-details pr-10">
+                                                <h6 class="widget-title border-left mb-20">billing details</h6>
+                                                @if (kh != null)
+                                                {
+                                                    <input type="hidden" name="tentk" value="@kh.tenTk"/>
+                                                    <input type="text" id="ten" name="ten" placeholder="Họ Tên Người Nhận" value="@kh.tenKh">
+                                                    <input type="text" id="sdt" name="sdt" placeholder="Số điện thoại" value="@kh.sdt">
+                                                    <input type="text" id="diaChi" name="diaChi" placeholder="Địa chỉ người nhận" value="@kh.diaChi">
+                                                }
+                                                <textarea class="custom-textarea" id="ChuThich" name="ChuThich" placeholder="Chú thích thêm ..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- our order -->
+                                            <div class="payment-details pl-10 mb-50">
+                                                <h6 class="widget-title border-left mb-20">our order</h6>
+                                                <table>
+                                                    @foreach (var i in Model)
+                                                    {
+                                                        <tr>
+                                                            <td class="td-title-1">@i.ten x @i.sl</td>
+                                                            <td class="td-title-2">@string.Format("{0:#,##0}", @i.sl * @i.gia) VNĐ</td>
+                                                        </tr>
+                                                    }
+                                                    <tr>
+                                                        <td class="td-title-1">Phí Ship</td>
+                                                        <td class="td-title-2">30.000 VNĐ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="order-total">Tổng tiền</td>
+                                                        <td class="order-total-price">
+                                                            @{ 
+                                                                tongTien = 0;
+                                                                foreach(var i in Model)
+                                                                {
+                                                                    tongTien += i.sl * i.gia;
+                                                                }
+                                                            }
+                                                        @string.Format("{0:#,##0} VNĐ", tongTien + 30000)</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">Đặt hàng ngày nào !</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function removeSP(id) {
+        $.get("/Home/xoa1sp", { id: id }, function (data) {
+    });
+    }
+
+    function checkDangNhap()
+    {
+        $.get("/Home/checkLogin", function (data) {
+            if(!data.isLogin)
+            {
+                window.location.href = "/Home/DangNhap";
+            }
+        });
+    }
+</script>

@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/LayoutHome.cshtml";
+}
+
+<div id="page-content" class="page-wrapper">
+
+    <!-- LOGIN SECTION START -->
+    <div class="login-section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="registered-customers">
+                        <h6 class="widget-title border-left mb-50">Đănhg nhập</h6>
+                        <form action="/Home/checkDangNhap">
+                            <div class="login-account p-30 box-shadow">
+                                <p>Nếu bạn đã có tài khoản, vui lòng đăng nhập</p>
+                                @if(ViewBag.ThongBao == 1)
+                                {
+                                    <p style="color: red;">Thông tin tài khoản hoặc mật khẩu không chính xác.</p>
+                                }
+                                <input type="text" name="taikhoan" placeholder="Tên tài khoản">
+                                <input type="password" name="matkhau" placeholder="Mật Khẩu">
+                                <p><small><a href="#">Forgot our password?</a></small></p>
+                                <button class="submit-btn-1 btn-hover-1" type="submit">đăng nhập</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- new-customers -->
+                <div class="col-md-6">
+                    <div class="new-customers">
+                        <form action="./addDN" method="post">
+                            <h6 class="widget-title border-left mb-50">Tài khoản mới</h6>
+                            <div class="login-account p-30 box-shadow">
+                                @if (ViewBag.ThongBao == 2)
+                                {
+                                    <p style="color: red;">Tài khoản này đã tồn tại trên hệ thống.</p>
+                                }
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="text" id="atenTk" name="atenTk" placeholder="Nhập tên tài khoản">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input  id="aMatKhau"  name="aMatKhau" type="password" placeholder="Nhập mật khẩu">
+                                    </div>
+                                </div>
+                                <input type="text" id="atenkh" name="atenkh" placeholder="Nhập họ tên">
+                                <input type="text" id="aDiaChi" name="aDiaChi" placeholder="Nhập địa chỉ">
+                                <input type="text" id="aSDT" name="aSDT" placeholder="Nhập số điện thoại">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="submit-btn-1 mt-20 btn-hover-1" type="submit">Đăng kí</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="submit-btn-1 mt-20 btn-hover-1 f-right" type="reset">Làm mới</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

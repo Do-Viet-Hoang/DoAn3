@@ -1,0 +1,116 @@
+﻿<head>
+    @using DoAn3DVH;
+    @using System.Data;
+    @using System.Data.SqlClient;
+    @using System.Configuration;
+    @using DoAn3DVH.Models;
+    @{
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["strconnect"].ConnectionString);
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * From loaiDT", cn);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+
+        KhachHang kh = null;
+        if (Session["TaiKhoan"] != null)
+        {
+            kh = (KhachHang)Session["TaiKhoan"];
+        }
+    }
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Subas || Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/Assets/img/icon/favicon.png">
+    <!-- All CSS Files -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css">
+    <!-- Nivo-slider css -->
+    <link rel="stylesheet" href="~/Assets/lib/css/nivo-slider.css">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="~/Assets/css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="~/Assets/css/shortcode/shortcodes.css">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="~/Assets/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="~/Assets/css/responsive.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="~/Assets/css/custom.css">
+    <!-- Style customizer (Remove these two lines please) -->
+    <link rel="stylesheet" href="~/Assets/css/style-customizer.css">
+    @*<link href="#" data-style="styles" rel="stylesheet">*@
+    <!-- Modernizr JS -->
+    <script src="~/Assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- jquery latest version -->
+    <script src="~/Assets/js/vendor/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- START HEADER AREA -->
+        <header class="header-area header-wrapper">
+            <!-- header-top-bar -->
+            <div class="header-top-bar plr-185">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6 hidden-xs">
+                            <div class="call-us">
+                                <p class="mb-0 roboto">(+84) 0984638735</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="top-link clearfix">
+                                <ul class="link f-right">
+                                    <li>
+                                        @if (kh == null)
+                                        {
+                                            <a href="/Home/DangNhap">
+                                                <i class="zmdi zmdi-lock"></i>
+                                                Đăng nhập
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#">
+                                                <i class="zmdi zmdi-lock"></i>
+                                                @kh.tenTk
+                                            </a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-middle-area -->
+            <div id="sticky-header" class="header-middle-area plr-185">
+                <div class="container-fluid">
+                    <div class="full-width-mega-dropdown">
+                        <div class="row">
+                            <!-- logo -->
+                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                <div class="logo">
+                                    <a href="/Home/Index">
+                                        <img src="~/Assets/img/logo/logo.png" alt="main logo">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- END HEADER AREA -->
+    <!-- START MOBILE MENU AREA -->
+    @RenderBody()
+</body>
+<script src="~/Assets/js/bootstrap.min.js"></script>
+<!-- jquery.nivo.slider js -->
+<script src="~/Assets/lib/js/jquery.nivo.slider.js"></script>
+<!-- All js plugins included in this file. -->
+<script src="~/Assets/js/plugins.js"></script>
+<!-- Main js file that contents all jQuery plugins activation. -->
+<script src="~/Assets/js/main.js"></script>

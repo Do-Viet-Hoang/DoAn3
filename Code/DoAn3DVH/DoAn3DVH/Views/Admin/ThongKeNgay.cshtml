@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "ThongKeNgay";
+    Layout = "~/Views/LayoutAdmin.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="page-inner">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Thống kê theo ngày bán</h4>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-3">
+                                <select name="ngay" id="ngay" class="form-control" onchange="changeDate()">
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <select name="thang" id="thang" class="form-control" onchange="changeDate()">
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <select name="nam" id="nam" class="form-control" onchange="changeDate()">
+                                    @for (int i = 2019; i > 1908; i--)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="col-sm-12">
+                                <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Ngày Bán</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Mã sản phẩm</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Tên sản phẩm</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Giá bán</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Số lượng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="danh-sach">
+                                    </tbody>
+                                    <tr>
+                                        <td>Tổng doanh thu: </td>
+                                        <td colspan="4" id="tong-tien">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tổng số lượng: </td>
+                                        <td colspan="4" id="so-luong">0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeDate()
+    {
+        var ngay = $("#ngay").val();
+        var thang = $("#thang").val();
+        var nam = $("#nam").val();
+
+        $.post("/Admin/ThongKeNgay", { ngay: ngay, thang: thang, nam: nam }, function (data) {
+            $("#tong-tien").html(data.tongTien + " đ");
+            $("#so-luong").html(data.soLuong);
+            $("#danh-sach").html("");
+
+            $.each(data.danhSach, function (i, val) {
+                $("#danh-sach").append("<tr role=\"row\" class=\"odd\">\
+                <td class=\"sorting_1\">" + val.ngayBan + "</td>\
+                <td>" + val.maSp + "</td>\
+                <td>" + val.tenSp + "</td>\
+                <td>" + val.giaBan + "</td>\
+                <td>" + val.soLuong + "</td>\
+            </tr>");
+            });
+        });
+    }
+</script>

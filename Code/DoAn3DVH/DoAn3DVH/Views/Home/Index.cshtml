@@ -1,0 +1,415 @@
+﻿@model PagedList.PagedList<DoAn3DVH.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/LayoutHome.cshtml";
+}
+
+<section id="page-content" class="page-wrapper">
+    <div class="slider-area  plr-185  mb-80">
+        <div class="container-fluid">
+            <div class="slider-content">
+                <div class="row">
+                    <div class="active-slider-1 slick-arrow-1 slick-dots-1">
+                        <!-- layer-1 Start -->
+                        <div class="col-md-12">
+                            <div class="layer-1">
+                                <div class="slider-img">
+                                    <img src="~/Assets/img/slider/slider-1/1.jpg" alt="">
+                                </div>
+                                <div class="slider-info gray-bg">
+                                    <div class="slider-info-inner">
+                                        <h1 class="slider-title-1 text-uppercase text-black-1">Điện Thoại Đỗ Việt Hoàng</h1>
+                                        <div class="slider-brief text-black-2">
+                                            <p>Chào mừng bạn đến với cửa hàng của Đỗ Việt Hoàng. Cửa hàng có đầy đủ các mẫu mã mới nhất, đảm bảo chất lượng. Đặt uy tin lên hàng đầu. Cung cấp các sản phẩm chất lượng nhất cho khách hàng. Facebook: Đỗ Việt Hoàng</p>
+                                        </div>
+                                        <a href="/Home/DanhSachSanPham/L01" class="button extra-small button-black">
+                                            <span class="text-uppercase">MUA NGAY</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- layer-1 end -->
+                        <!-- layer-1 Start -->
+                        <div class="col-md-12">
+                            <div class="layer-1">
+                                <div class="slider-img">
+                                    <img src="~/Assets/img/slider/slider-1/2.jpg" alt="">
+                                </div>
+                                <div class="slider-info gray-bg">
+                                    <div class="slider-info-inner">
+                                        <h1 class="slider-title-1 text-uppercase text-black-1">Điện Thoại Đỗ Việt Hoàng</h1>
+                                        <div class="slider-brief text-black-2">
+                                            <p>Chào mừng bạn đến với cửa hàng của Đỗ Việt Hoàng. Cửa hàng có đầy đủ các mẫu mã mới nhất, đảm bảo chất lượng. Đặt uy tin lên hàng đầu. Cung cấp các sản phẩm chất lượng nhất cho khách hàng. Facebook: Đỗ Việt Hoàng</p>
+                                        </div>
+                                        <a href="/Home/DanhSachSanPham/L03" class="button extra-small button-black">
+                                            <span class="text-uppercase">MUA NGAY</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="featured-product-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">SẢN PHẨM MỚI RA MẮT</h2>
+                        <h6>Các mẫu sản phẩm mới ra mắt</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="row active-featured-product slick-arrow-2">
+                    <!-- product-item start -->
+                    @foreach (var item in ViewBag.SanPhamMOi)
+                    {
+                        <div class="col-xs-12">
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <a href="/Home/GetSpDetail/@item.maSp">
+                                        <img src="~/Assets/img/product/@item.hinhAnh" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">
+                                        <a href="/Home/GetSpDetail/@item.maSp">@item.tenSp</a>
+                                    </h6>
+                                    <div class="pro-rating">
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                    </div>
+                                    <h3 class="pro-price">@string.Format("{0:#,##0}", @item.gia) VNĐ</h3>
+                                    <ul class="action-button">
+                                        <li>
+                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                        </li>
+                                        <li>
+                                            <a title="Add to cart" onclick="muahang('@item.maSp')"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- product-item end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BY BRAND SECTION END -->
+    <!-- FEATURED PRODUCT SECTION START -->
+
+    <div class="featured-product-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">SẢN PHẨM HOT</h2>
+                        <h6>Các mẫu sản phẩm đang bán chạy tại shop</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="row active-featured-product slick-arrow-2">
+                    <!-- product-item start -->
+                    @foreach (var v in ViewBag.SanPhamHot)
+                    {
+                        <div class="col-xs-12">
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <a href="/Home/GetSpDetail/@v.maSp">
+                                        <img src="~/Assets/img/product/@v.hinhAnh" alt="" />
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">
+                                        <a href="/Home/GetSpDetail/@v.maSp">@v.tenSp</a>
+                                    </h6>
+                                    <div class="pro-rating">
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                    </div>
+                                    <h3 class="pro-price">@string.Format("{0:#,##0}", @v.gia) VNĐ</h3>
+                                    <ul class="action-button">
+                                        <li>
+                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                        </li>
+                                        <li>
+                                            <a title="Add to cart" onclick="muahang('@v.maSp')"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- product-item end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FEATURED PRODUCT SECTION END -->
+    <!-- UP COMMING PRODUCT SECTION START -->
+    <div class="up-comming-product-section mb-80">
+        <div class="container">
+            <div class="row">
+                <!-- up-comming-pro -->
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="up-comming-pro gray-bg clearfix">
+                        <div class="up-comming-pro-img f-left">
+                            <a href="/Home/GetSpDetail/D03">
+                                <img src="~/Assets/img/up-comming/1.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="up-comming-pro-info f-left">
+                            <h3><a href="/Home/GetSpDetail/D03">Sản phẩm giảm giá</a></h3>
+                            <p>Từng bưng khuyến mãi giảm giá 70% cho điện thoại OPPO Reno 2. Chương trình áp dụng cho 100 khác hàng đầu tiên. Nhanh tay đặt mua ngay. Để được hưởng trọn ưu đãi của cửa hàng</p>
+                            <div class="up-comming-time">
+                                <div data-countdown="2020/02/02"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 hidden-sm col-xs-12">
+                    <div class="banner-item banner-1">
+                        <div class="ribbon-price">
+                            <span>14.990.000</span>
+                        </div>
+                        <div class="banner-img">
+                            <a href="/Home/GetSpDetail/D05"><img src="~/Assets/img/banner/1.jpg" alt=""></a>
+                        </div>
+                        <div class="banner-info">
+                            <h3><a href="/Home/GetSpDetail/D05">SAMSUNG A80</a></h3>
+                            <ul class="banner-featured-list">
+                                <li>
+                                    <i class="zmdi zmdi-check"></i><span>Thiết kế sang trọng</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check"></i><span>Thời lượng Pin Cao</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check"></i><span>Hỗ trợ sạc nhanh</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check"></i><span> Hỗ trợ 2 SIM</span>
+                                </li>
+                                <li>
+                                    <i class="zmdi zmdi-check"></i><span>Cấu hình khủng</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- UP COMMING PRODUCT SECTION END -->
+    <!-- PRODUCT TAB SECTION START -->
+    <div class="product-tab-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">DANH SÁCH SẢN PHẨM</h2>
+                        <h6>Các sản phẩm tiêu biểu của cửa hàng</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tab">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- popular-product start -->
+                    <div class="tab-pane active" id="popular-product">
+                        <div class="row">
+                            @foreach (var i in ViewBag.DanhSachSP)
+                            {
+                            <!-- product-item start -->
+                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="/Home/GetSpDetail/@i.maSp">
+                                                <img src="~/Assets/img/product/@i.hinhAnh" alt="" />
+                                            </a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h6 class="product-title">
+                                                <a href="/Home/GetSpDetail/@i.maSp">@i.tenSp</a>
+                                            </h6>
+                                            <div class="pro-rating">
+                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                            </div>
+                                            <h3 class="pro-price">@string.Format("{0:#,##0}", @i.gia) VNĐ</h3>
+                                            <ul class="action-button">
+                                                <li>
+                                                    <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="muahang('@i.maSp')" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- product-item end -->
+                            }
+                        </div>
+                        <!-- shop-pagination start -->
+                        <div class="row">
+                            <ul class="shop-pagination box-shadow text-center ptblr-10-30">
+                                @{
+                                    @Html.PagedListPager((PagedList.IPagedList)ViewBag.DanhSachSP, page => Url.Action("Index", new { page }));
+                                }
+                            </ul>
+                        </div>
+                        <!-- shop-pagination end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT TAB SECTION END -->
+    <!-- BLOG SECTION START -->
+    <div class="blog-section mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-left mb-40">
+                        <h2 class="uppercase">Blog mới nhất</h2>
+                        <h6>Điện thoại thứ không thể thiếu trong xã hội, hiện đại hiện nay.</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="blog">
+                <div class="row active-blog">
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/img/blog/1.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">Giới thiệu điện thoại</a></h5>
+                                <p>Điện thoại di động chính thức ra đời vào ngày 3 tháng 4 năm 1973, mang tên Motorola Dyna Tac, phát minh bởi nhà sáng chế John F. Mitchell và Martin Cooper [1]. Motorola Dyna Tac mang hình dáng gần giống điện thoại di động ngày nay mặc dù vẫn còn khá cồng kềnh (nặng khoảng 1 kg) và không phổ biến.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Google</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/img/blog/2.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">Giới thiệu điện thoại</a></h5>
+                                <p>Điện thoại di động chính thức ra đời vào ngày 3 tháng 4 năm 1973, mang tên Motorola Dyna Tac, phát minh bởi nhà sáng chế John F. Mitchell và Martin Cooper [1]. Motorola Dyna Tac mang hình dáng gần giống điện thoại di động ngày nay mặc dù vẫn còn khá cồng kềnh (nặng khoảng 1 kg) và không phổ biến.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Google</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/img/blog/3.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">Giới thiệu về điện thoại</a></h5>
+                                <p>Điện thoại di động chính thức ra đời vào ngày 3 tháng 4 năm 1973, mang tên Motorola Dyna Tac, phát minh bởi nhà sáng chế John F. Mitchell và Martin Cooper [1]. Motorola Dyna Tac mang hình dáng gần giống điện thoại di động ngày nay mặc dù vẫn còn khá cồng kềnh (nặng khoảng 1 kg) và không phổ biến.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Google</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                    <!-- blog-item start -->
+                    <div class="col-xs-12">
+                        <div class="blog-item">
+                            <img src="~/Assets/img/blog/1.jpg" alt="">
+                            <div class="blog-desc">
+                                <h5 class="blog-title"><a href="single-blog.html">Giới thiệu về điện thoại</a></h5>
+                                <p>Điện thoại di động chính thức ra đời vào ngày 3 tháng 4 năm 1973, mang tên Motorola Dyna Tac, phát minh bởi nhà sáng chế John F. Mitchell và Martin Cooper [1]. Motorola Dyna Tac mang hình dáng gần giống điện thoại di động ngày nay mặc dù vẫn còn khá cồng kềnh (nặng khoảng 1 kg) và không phổ biến.</p>
+                                <div class="read-more">
+                                    <a href="single-blog.html">Google</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="zmdi zmdi-share"></i>29 Share</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- blog-item end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BLOG SECTION END -->
+</section>

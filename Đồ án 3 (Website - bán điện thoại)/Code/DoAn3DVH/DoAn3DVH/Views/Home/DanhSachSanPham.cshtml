@@ -1,0 +1,86 @@
+﻿@model IEnumerable<DoAn3DVH.Models.SanPham>
+@using DoAn3DVH.Models;
+@{
+    ViewBag.Title = "DanhSachSanPham";
+    Layout = "~/Views/LayoutHome.cshtml";
+}
+
+<section id="page-content" class="page-wrapper">
+    <!-- PRODUCT TAB SECTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">@ViewBag.tenLoaiDT</h1>
+                            <ul class="breadcrumb-list">
+                                <li><a href="Index.cshtml">Home</a></li>
+                                <li>@ViewBag.tenLoaiDT</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-tab-section mb-50">
+        <div class="container">
+          
+                
+            <div class="product-tab">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- popular-product start -->
+                    <div class="tab-pane active" id="popular-product">
+                        <div class="row">
+                            @foreach(var i in Model)
+                            { 
+                            <!-- product-item start -->
+                            <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="product-item">
+                                    <div class="product-img">
+                                        <a href="/Home/GetSpDetail/@i.maSp">
+                                            <img src="~/Assets/img/product/@i.hinhAnh" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h6 class="product-title">
+                                            <a href="/Home/GetSpDetail/@i.maSp">@i.tenSp</a>
+                                        </h6>
+                                        <div class="pro-rating">
+                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                            <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                        </div>
+                                        <h3 class="pro-price">@string.Format("{0:#,##0}", @i.gia) VNĐ</h3>
+                                        <ul class="action-button">
+                                            <li>
+                                                <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-toggle="modal" data-target="#productModal" title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
+                                            </li>
+                                            <li>
+                                                <a title="Add to cart" onclick="muahang('@i.maSp')"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product-item end -->
+                            }
+                        </div>
+                    </div>
+                    <!-- special-offer end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT TAB SECTION END -->
+</section>

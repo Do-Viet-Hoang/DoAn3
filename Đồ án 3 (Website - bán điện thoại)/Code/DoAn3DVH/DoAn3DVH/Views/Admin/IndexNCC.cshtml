@@ -1,0 +1,140 @@
+﻿@model IEnumerable<DoAn3DVH.Models.NhaCungCap>
+@{
+    ViewBag.Title = "IndexNCC";
+    Layout = "~/Views/LayoutAdmin.cshtml";
+}
+<div class="main-panel">
+    <div class="content">
+        <div class="page-inner">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Quản lý nhà cung cấp</h4>
+                            <button class="btn btn-primary btn-round ml-auto" onclick="addOneNcc()">
+                                <i class="fa fa-plus"></i>
+                                Thêm Nhà cung cấp
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="./addNCC" method="post" enctype="multipart/form-data">
+                            <!-- Modal -->
+                            <div class="modal fade" id="addOne" tabindex="-1" role="dialog" aria-hidden="true">
+                                <input type="hidden" name="aoe" id="aoe" value="1"/>
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-bd">
+                                            <h5 class="modal-title">
+                                                <span class="fw-mediumbold">
+                                                    Thêm
+                                                </span>
+                                                <span class="fw-light">
+                                                    Mới
+                                                </span>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6 pr-0" id="hideMaNcc">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Mã NCC</label>
+                                                        <input id="aMaNcc" name="aMaNcc" type="text" class="form-control" placeholder="Điền vào">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Tên NCC</label>
+                                                        <input id="aTenNcc" name="aTenNcc" type="text" class="form-control" placeholder="Điền vào">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 pr-0">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Địa chỉ</label>
+                                                        <input id="aDiaChi" name="aDiaChi" text" class="form-control" placeholder="Điền vào">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Số điện thoại</label>
+                                                        <input id="aSDT" name="aSDT" type="text" class="form-control" placeholder="Điền vào">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <button type="submit" id="addRowButton" class="btn btn-primary">Thực hiện</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="table-responsive">
+                            <div class="col-sm-12">
+                                <table id="add-row" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="add-row_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 193px;">Mã NCC</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 283px;">Tên NCC</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 152px;">Địa chỉ</th>
+                                            <th class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 152px;">SĐT</th>
+                                            <th style="width: 127px;" class="sorting" tabindex="0" aria-controls="add-row" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var i in Model)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">@i.maNCC</td>
+                                                <td>@i.tenNCC</td>
+                                                <td>@i.diaChi</td>
+                                                <td>@i.SDT</td>
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <button class="btn btn-link btn-primary btn-lg" onclick="editOneNcc('@i.maNCC')">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <a class="btn btn-link btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá Nhà cung cấp này không?')" href="./xoaNcc/@i.maNCC">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function addOneNcc() {
+        $("#aoe").val("1");
+        $("#aMaNcc").val("");
+        $("#aTenNcc").val("");
+        $("#aDiaChi").val("");
+        $("#aSDT").val("");
+        $('#addOne').modal("show");
+    }
+    function editOneNcc(id) {
+        $("#aoe").val("0");
+        $("#hideMaNcc").hide();
+        $.get("/Admin/get1Ncc", { id: id }, function (data) {
+            $("#aMaNcc").val(data.maNCC);
+            $("#aTenNcc").val(data.tenNCC);
+            $("#aDiaChi").val(data.diaChi);
+            $("#aSDT").val(data.SDT);
+        });
+        $('#addOne').modal("show");
+    }
+</script>
+
